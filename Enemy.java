@@ -1,3 +1,3 @@
-public class Enemy extends Character{
-
-}
+//public class Enemy extends Character{
+//
+//}
