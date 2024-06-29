@@ -1,3 +1,3 @@
-//public class Enemy extends Character{
+//protected class Enemy extends Character{
 //
 //}

@@ -1,14 +1,14 @@
 public class Character {
+    String name; // name of the character e.g "Fred"
+    String origin; // origin of the character e.g "Goblin"
+    int health; // present health value at the time
+    int healthValue; // total health value
+    int defense; // total defense value
+    int strength; // total strength value
+    int dexterity; // total strength value
+    int equippedItemId; // equipped item id
 
-    String name;
-    String origin;
-    int health;
-    int healthValue;
-    int defense;
-    int strength;
-    int dexterity;
-    int equippedItemId;
-
+    public Character() {}
     public Character(String name, String origin,int health, int healthValue, int defense, int strength, int dexterity, int equippedItemId) {
         this.name = name;
         this.origin = origin;

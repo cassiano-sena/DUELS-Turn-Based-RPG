@@ -1,4 +1,4 @@
-//public class GameProcess {
+//private class GameProcess {
 //    boolean running=true;
 //    while(!running){
 //        System.out.println("true");

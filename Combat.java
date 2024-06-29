@@ -1,6 +1,7 @@
 public class Combat {
-    int turns;
-    int order[];
+    int turns; // total amount of turns that have elapsed
+    int order[]; // dictates the order of action during combat
+    int orderCounter[]; // indicates whose action it is
 
     public void turnOrder(int dexterity, int dexterity2){
         boolean faster = dexterity > dexterity2;
