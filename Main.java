@@ -1,3 +1,3 @@
 public class Main {
-    GameProcess gameProcess = new GameProcess();
+//    GameProcess gameProcess = new GameProcess();
 }
