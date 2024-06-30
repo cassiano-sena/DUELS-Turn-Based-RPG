@@ -1,3 +1,6 @@
 public class Main {
-//    GameProcess gameProcess = new GameProcess();
+    public static void main(String[] args) {
+        GameProcess gameProcess = new GameProcess();
+        gameProcess.mainMenu();
+    }
 }
