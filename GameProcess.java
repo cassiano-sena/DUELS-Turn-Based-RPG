@@ -26,7 +26,7 @@ class GameProcess {
             System.out.print("Escolha uma opção: ");
 
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Consome o newline
+            scanner.nextLine();
 
             switch (choice) {
                 case 1:
@@ -82,7 +82,6 @@ class GameProcess {
             return;
         }
 
-        // Selecionar a classe com base na escolha do jogador
         Classes selectedClass = null;
         switch (classChoice) {
             case 1:
@@ -104,7 +103,6 @@ class GameProcess {
 
         player = new Player(name, origin, selectedClass, null, 0, this);
 
-        // Equipar a arma com base na classe selecionada
         equipCharacterWeapon(selectedClass, player);
         player.setSelectedClass(selectedClass);
 
@@ -130,7 +128,7 @@ class GameProcess {
         System.out.println("4. Ladino - Rápido e Letal");
         System.out.print("Sua escolha: ");
         int choice = scanner.nextInt();
-        scanner.nextLine(); // Limpar o buffer de entrada
+        scanner.nextLine();
         if (choice < 1 || choice > 4) {
             System.out.println("Opção inválida.");
         }
@@ -140,7 +138,6 @@ class GameProcess {
     private void equipCharacterWeapon(Classes selectedClass, Player player) {
         int weaponChoice = selectWeapon();
 
-        // Equipar a arma com base na escolha do jogador
         if (weaponChoice != -1) {
             player.setEquippedItemById(weaponChoice);
         }
@@ -150,7 +147,7 @@ class GameProcess {
         printWeaponOptions();
         System.out.print("Sua escolha: ");
         int choice = scanner.nextInt();
-        scanner.nextLine(); // Limpar o buffer de entrada
+        scanner.nextLine();
         if (choice < 1 || choice > 12) {
             System.out.println("Opção inválida.");
             return -1;
@@ -194,19 +191,17 @@ class GameProcess {
         int roundCount = 1;
         System.out.println("---- Início da Batalha ----");
 
-        enemy = createEnemy(); // Cria um inimigo para a batalha
+        enemy = createEnemy();
         boolean inBattle = true;
 
         player.viewEnemy(enemy);
 
-        // Definição da ordem de turno
         Character[] order = defineTurnOrder(player, enemy);
 
         while (inBattle) {
             System.out.println("-----------------------------");
             System.out.println("\nRodada " + roundCount);
 
-            // Imprime informações do jogador à esquerda
             System.out.printf("%-20s %-20s\n", "Jogador: " + player.getName(), "Inimigo: " + enemy.getName());
             System.out.printf("%-20s %-20s\n", "Classe: " + player.getSelectedClass().getName(), "Classe: " + enemy.getSelectedClass().getName());
             System.out.printf("%-20s %-20s\n", "Vida: " + player.getHealth() + "/" + player.getSelectedClass().getMaxHealth(), "Vida: " + enemy.getHealth() + "/" + enemy.getSelectedClass().getMaxHealth());
@@ -214,7 +209,6 @@ class GameProcess {
             System.out.println("\n");
 
             for (Character character : order) {
-                // Verifica se o personagem está vivo antes de agir
                 if (character.getHealth() > 0) {
                     System.out.println("\nTurno de " + character.getName());
 
@@ -224,7 +218,6 @@ class GameProcess {
                         ((Enemy) character).performAction(player);
                     }
 
-                    // Verifica se a batalha terminou após cada ação
                     if (player.getHealth() <= 0 || enemy.getHealth() <= 0) {
                         inBattle = false;
                         break;
@@ -234,12 +227,11 @@ class GameProcess {
             roundCount++;
         }
 
-        // Exibe resultado da batalha
         if (player.getHealth() <= 0) {
             System.out.println("Você foi derrotado!");
         } else {
             System.out.println("Você venceu a batalha!");
-            gameManager.addBattleWon(); // Adiciona uma batalha ganha ao GameManager
+            gameManager.addBattleWon();
         }
 
         System.out.println("---- Fim da Batalha ----");
@@ -251,8 +243,6 @@ class GameProcess {
     }
 
     private Character[] defineTurnOrder(Player player, Enemy enemy) {
-        // Defina aqui a lógica para determinar a ordem de turno inicial
-        // Exemplo simples: baseado na destreza
         Character[] order = new Character[2];
         if (player.getSelectedClass().getDexterity() >= enemy.getSelectedClass().getDexterity()) {
             order[0] = player;
@@ -292,16 +282,4 @@ class GameProcess {
         // Criação do inimigo usando a classe específica
         return new Enemy("Inimigo", "Humano", enemyClass, new Item.Sword(), 0, this); // Exemplo de health fixo para demonstração
     }
-
-//    public void viewEnemy(Enemy enemy) {
-//        System.out.println("---- Detalhes do Inimigo ----");
-//        System.out.println("Nome: " + enemy.getName());
-//        System.out.println("Raça: " + enemy.getOrigin());
-//        System.out.println("Classe: " + enemy.getSelectedClass().getName());
-//        System.out.println("Força: " + enemy.getSelectedClass().getStrength());
-//        System.out.println("Destreza: " + enemy.getSelectedClass().getDexterity());
-//        System.out.println("Vida: " + enemy.getHealth() + "/" + enemy.getSelectedClass().getMaxHealth());
-//        System.out.println("Defesa: " + enemy.getSelectedClass().getDefense());
-//        System.out.println("-----------------------------");
-//    }
 }

@@ -15,7 +15,7 @@ public class Enemy extends Character {
 
     public void performAction(Player player) {
         System.out.println("Turno de " + name + "!");
-        int choice = random.nextInt(3) + 1; // Escolhe uma ação aleatória entre 1 e 3
+        int choice = random.nextInt(3) + 1;
 
         switch (choice) {
             case 1:
@@ -45,11 +45,10 @@ public class Enemy extends Character {
             if (itemActions != null && !itemActions.isEmpty()) {
                 int actionIndex = random.nextInt(itemActions.size());
                 Attack selectedAttack = itemActions.get(actionIndex);
-//                int damage = calculateDamage(selectedAttack.getDamageFormula());
-                int damage = calculateDamage(gameProcess.enemy, player);
+                int damage = CombatManager.calculateDamage(gameProcess.enemy, player, selectedAttack);
                 System.out.println(name + " usou " + selectedAttack.getName() + "!");
                 System.out.println("Dano causado: " + damage);
-                player.takeDamage(damage); // Aplica dano ao jogador
+                player.takeDamage(damage);
             } else {
                 System.out.println("Esta arma não possui ataques disponíveis.");
             }
@@ -58,7 +57,7 @@ public class Enemy extends Character {
         }
     }
 
-    private void heal() {
+    protected void heal() {
         Random random = new Random();
         int healAmount = random.nextInt(10) + 1;
         this.health += healAmount;
@@ -81,7 +80,6 @@ public class Enemy extends Character {
     @Override
     public void useSkill() {
         System.out.println(name + " usa uma habilidade especial!");
-        // Implemente a lógica da habilidade se necessário
     }
 
     public void waitFor(int seconds) {

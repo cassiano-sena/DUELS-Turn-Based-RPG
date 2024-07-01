@@ -83,7 +83,7 @@ public class Player extends Character {
                     Attack selectedAttack = itemActions.get(actionIndex - 1);
                     System.out.println("Você usou " + selectedAttack.getName() + "!");
                     //int damage = calculateDamage(selectedAttack.getDamageFormula());
-                    int damage = calculateDamage(gameProcess.player, target);
+                    int damage = CombatManager.calculateDamage(gameProcess.player, target, selectedAttack);
                     System.out.println("Dano causado: " + damage);
                     target.takeDamage(damage); // Aplicar dano ao inimigo
                 } else {
@@ -97,7 +97,7 @@ public class Player extends Character {
         }
     }
 
-    private void heal() {
+    protected void heal() {
         Random random = new Random();
         int healAmount = random.nextInt(10) + 1;
         this.health += healAmount;
@@ -112,7 +112,7 @@ public class Player extends Character {
         return chance < 30;
     }
 
-    @Override
+    //@Override
     public void equipItem(int itemId) {
         System.out.println("Equipando item ID " + itemId + "...");
         setEquippedItemById(itemId);
