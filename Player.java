@@ -134,14 +134,15 @@ public class Player extends Character {
     }
 
     public void viewEnemy(Enemy enemy) {
-        if (enemy != null) {
-            System.out.println("---- Detalhes do Inimigo ----");
-            System.out.println("Nome: " + enemy.getName());
-            System.out.println("Raça: " + enemy.getOrigin());
-            System.out.println("Classe: " + enemy.getSelectedClass().getName());
-            System.out.println("-----------------------------");
-        } else {
-            System.out.println("Inimigo desconhecido.");
-        }
+        System.out.println("---- Detalhes do Inimigo ----");
+        System.out.println("Nome: " + enemy.getName());
+        System.out.println("Raça: " + enemy.getOrigin());
+        System.out.println("Classe: " + enemy.getSelectedClass().getName());
+        System.out.println("Arma: " + enemy.getEquippedItem().getName());
+        System.out.println("Força: " + enemy.getSelectedClass().getStrength());
+        System.out.println("Destreza: " + enemy.getSelectedClass().getDexterity());
+        System.out.println("Vida: " + enemy.getHealth() + "/" + enemy.getSelectedClass().getMaxHealth());
+        System.out.println("Defesa: " + enemy.getSelectedClass().getDefense());
+        System.out.println("-----------------------------");
     }
 }

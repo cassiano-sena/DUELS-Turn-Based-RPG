@@ -4,15 +4,25 @@ import java.util.Scanner;
 class GameProcess {
     public Player player;
     public Enemy enemy;
-    private final Scanner scanner = new Scanner(System.in);
+    public GameManager gameManager;
+    public final Scanner scanner = new Scanner(System.in);
+
+    public GameProcess() {
+        this.gameManager = new GameManager();
+    }
 
     public void mainMenu() {
         while (true) {
             System.out.println("---- Menu Principal ----");
+            System.out.println("Bem vindo à DUELS!");
+            System.out.println("Esse jogo é um Turn-Based-RPG focado em duelos");
+            System.out.println("\n");
+            System.out.println("------------------------");
             System.out.println("1. Criar Personagem");
             System.out.println("2. Começar Batalha");
             System.out.println("3. Ver personagem");
-            System.out.println("4. Sair");
+            System.out.println("4. Ajuda");
+            System.out.println("5. Sair");
             System.out.print("Escolha uma opção: ");
 
             int choice = scanner.nextInt();
@@ -37,6 +47,19 @@ class GameProcess {
                     }
                     break;
                 case 4:
+                    System.out.println("Crie um personagem, selecione sua classe e arma e parta para o combate!");
+                    System.out.println("Classes ditam seus atributos como vida e defesa");
+                    System.out.println("Armas possuem habilidades e danos característicos");
+                    System.out.println("\n");
+                    System.out.println("Vida é o total de dano que você pode receber antes de ser derrotado");
+                    System.out.println("Defesa é o numero que será reduzido de ataques recebidos");
+                    System.out.println("Força é o modificador de ataques que usam força");
+                    System.out.println("Destreza é o modificador que determina ordem de combate, também serve como modificador para alguns ataques");
+                    System.out.println("\n");
+                    System.out.println("Pressione qualquer tecla...");
+                    scanner.nextLine();
+                    break;
+                case 5:
                     System.out.println("Saindo do jogo...");
                     System.exit(0);
                     break;
@@ -155,13 +178,17 @@ class GameProcess {
         System.out.println("Nome: " + player.getName());
         System.out.println("Raça: " + player.getOrigin());
         System.out.println("Classe: " + player.getSelectedClass().getName());
-        System.out.println("Arma: " + player.getEquippedItem());
+        System.out.println("Arma: " + player.getEquippedItem().getName());
         System.out.println("Saúde: " + player.getHealth() + "/" + player.getSelectedClass().getMaxHealth());
         System.out.println("Defesa: " + player.getSelectedClass().getDefense());
         System.out.println("Força: " + player.getSelectedClass().getStrength());
         System.out.println("Destreza: " + player.getSelectedClass().getDexterity());
+        System.out.println("Nível: " + gameManager.getLevel());
+        System.out.println("Experiência: " + gameManager.getExperiencePoints());
+        System.out.println("Batalhas ganhas: " + gameManager.getBattlesWon());
         System.out.println("-----------------------------");
     }
+
 
     private void startBattle() {
         int roundCount = 1;
@@ -170,7 +197,7 @@ class GameProcess {
         enemy = createEnemy(); // Cria um inimigo para a batalha
         boolean inBattle = true;
 
-        viewEnemy(enemy);
+        player.viewEnemy(enemy);
 
         // Definição da ordem de turno
         Character[] order = defineTurnOrder(player, enemy);
@@ -212,10 +239,15 @@ class GameProcess {
             System.out.println("Você foi derrotado!");
         } else {
             System.out.println("Você venceu a batalha!");
+            gameManager.addBattleWon(); // Adiciona uma batalha ganha ao GameManager
         }
 
         System.out.println("---- Fim da Batalha ----");
-        System.out.println("Rodadas: " + roundCount + "\n\n\n");
+        System.out.println("Rodadas: " + roundCount);
+        System.out.println("Batalhas ganhas: " + gameManager.getBattlesWon());
+        System.out.println("Experiência: " + gameManager.getExperiencePoints());
+        System.out.println("Nível: " + gameManager.getLevel());
+        System.out.println("\n\n\n");
     }
 
     private Character[] defineTurnOrder(Player player, Enemy enemy) {
@@ -261,11 +293,15 @@ class GameProcess {
         return new Enemy("Inimigo", "Humano", enemyClass, new Item.Sword(), 0, this); // Exemplo de health fixo para demonstração
     }
 
-    public void viewEnemy(Enemy enemy) {
-        System.out.println("---- Detalhes do Inimigo ----");
-        System.out.println("Nome: " + enemy.getName());
-        System.out.println("Raça: " + enemy.getOrigin());
-        System.out.println("Classe: " + enemy.getSelectedClass().getName());
-        System.out.println("-----------------------------");
-    }
+//    public void viewEnemy(Enemy enemy) {
+//        System.out.println("---- Detalhes do Inimigo ----");
+//        System.out.println("Nome: " + enemy.getName());
+//        System.out.println("Raça: " + enemy.getOrigin());
+//        System.out.println("Classe: " + enemy.getSelectedClass().getName());
+//        System.out.println("Força: " + enemy.getSelectedClass().getStrength());
+//        System.out.println("Destreza: " + enemy.getSelectedClass().getDexterity());
+//        System.out.println("Vida: " + enemy.getHealth() + "/" + enemy.getSelectedClass().getMaxHealth());
+//        System.out.println("Defesa: " + enemy.getSelectedClass().getDefense());
+//        System.out.println("-----------------------------");
+//    }
 }

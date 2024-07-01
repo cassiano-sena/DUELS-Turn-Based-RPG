@@ -169,7 +169,7 @@ public class Item {
             this.itemActions = Arrays.asList(
                     new Attack(1, "Salto Atordoante", "Salta em direção ao oponente com seu martelo", "10 + FOR", 10, 50, "50% de chance de atordoamento", 10,false, false),
                     new Attack(2, "Martelo Pesado", "Balança o pesado martelo", "10 + FOR", 10,50, "50% de chance de acerto crítico", 10,false, false),
-                    new Attack(3, "Carregar", "Sacrifica o turno carregando para um poderoso ataque", "30 + FOR", 10, 100, "crítico", 10,false, false)
+                    new Attack(3, "Carregar", "Sacrifica o turno carregando para um poderoso ataque", "20 + FOR", 10, 100, "crítico", 10,false, false)
             );
         }
 

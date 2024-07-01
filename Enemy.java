@@ -65,13 +65,17 @@ public class Enemy extends Character {
         System.out.println(name + " se curou e restaurou " + healAmount + " de vida!");
     }
 
-    private void viewPlayer(Player player) {
-        System.out.println("Analisando " + player.getName() + "...");
+    public void viewPlayer(Player player) {
+        System.out.println("---- Detalhes do Inimigo ----");
         System.out.println("Nome: " + player.getName());
-        System.out.println("Origem: " + player.getOrigin());
-        System.out.println("Classe: " + player.getSelectedClass());
+        System.out.println("Raça: " + player.getOrigin());
+        System.out.println("Classe: " + player.getSelectedClass().getName());
+        System.out.println("Arma: " + player.getEquippedItem().getName());
+        System.out.println("Força: " + player.getSelectedClass().getStrength());
+        System.out.println("Destreza: " + player.getSelectedClass().getDexterity());
         System.out.println("Vida: " + player.getHealth() + "/" + player.getSelectedClass().getMaxHealth());
         System.out.println("Defesa: " + player.getSelectedClass().getDefense());
+        System.out.println("-----------------------------");
     }
 
     @Override
