@@ -14,19 +14,22 @@ public class Enemy extends Character {
     }
 
     public void performAction(Player player) {
-        System.out.println("Turno de " + name + "!");
-        int choice = random.nextInt(3) + 1; // Escolhe uma ação aleatória entre 1 e 3
+        //System.out.println("Turno de " + name + "!");
+        int choice = random.nextInt(3) + 1;
 
         switch (choice) {
             case 1:
+                System.out.println("O inimigo irá atacar!");
                 attack(player);
                 waitFor(3);
                 break;
             case 2:
+                System.out.println("O inimigo irá usar uma poção!");
                 heal();
                 waitFor(3);
                 break;
             case 3:
+                System.out.println("O inimigo irá analisar o jogador!");
                 viewPlayer(player);
                 waitFor(3);
                 break;
@@ -45,11 +48,11 @@ public class Enemy extends Character {
             if (itemActions != null && !itemActions.isEmpty()) {
                 int actionIndex = random.nextInt(itemActions.size());
                 Attack selectedAttack = itemActions.get(actionIndex);
-//                int damage = calculateDamage(selectedAttack.getDamageFormula());
-                int damage = calculateDamage(gameProcess.enemy, player);
                 System.out.println(name + " usou " + selectedAttack.getName() + "!");
+                waitFor(2);
+                int damage = CombatManager.calculateDamage(gameProcess.enemy, player, selectedAttack);
                 System.out.println("Dano causado: " + damage);
-                player.takeDamage(damage); // Aplica dano ao jogador
+                player.takeDamage(damage);
             } else {
                 System.out.println("Esta arma não possui ataques disponíveis.");
             }
@@ -58,15 +61,19 @@ public class Enemy extends Character {
         }
     }
 
-    private void heal() {
+    protected void heal() {
         Random random = new Random();
         int healAmount = random.nextInt(10) + 1;
+        int healthCheck = gameProcess.enemy.getHealth() + healAmount;
+        if(healthCheck > gameProcess.enemy.getSelectedClass().getMaxHealth()){
+            System.out.println(gameProcess.enemy.getName()+" recebeu sobrevida de " + healAmount + " pontos!");
+        }
         this.health += healAmount;
         System.out.println(name + " se curou e restaurou " + healAmount + " de vida!");
     }
 
     public void viewPlayer(Player player) {
-        System.out.println("---- Detalhes do Inimigo ----");
+        System.out.println("---- Detalhes do Jogador ----");
         System.out.println("Nome: " + player.getName());
         System.out.println("Raça: " + player.getOrigin());
         System.out.println("Classe: " + player.getSelectedClass().getName());
@@ -81,7 +88,6 @@ public class Enemy extends Character {
     @Override
     public void useSkill() {
         System.out.println(name + " usa uma habilidade especial!");
-        // Implemente a lógica da habilidade se necessário
     }
 
     public void waitFor(int seconds) {

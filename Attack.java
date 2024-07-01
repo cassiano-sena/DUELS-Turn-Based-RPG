@@ -1,16 +1,20 @@
-public class Attack {
-    private int id; // id do ataque
-    private String name; // nome do ataque
-    private String description; // descrição do ataque
-    private static String damageFormula; // formula para o calculo do ataque, serve para informar o jogador de como é feito o calculo
-    private int damage; // o dano real do ataque
-    private int hitChance; // chance de acerto
-    private String effect; // efeitos secundários do ataque
-    private double criticalChance; // modificador da chance de crítico, deve poder ser alterado para garantir ou aumentar a chance
-    private boolean skipThisTurn; // variavel para se o ataque acontece no proximo turno do atacante
-    private boolean skipNextTurn; // variavel para se o ataque pula o próximo turno do atacante
+import java.util.Random;
 
-    public Attack(int id, String name, String description, String damageFormula, int damage, int hitChance, String effect, double criticalChance, boolean skipThisTurn, boolean skipNextTurn) {
+public class Attack {
+    private int id;
+    private String name;
+    private String description;
+    private String damageFormula;
+    private int damage;
+    private int hitChance;
+    private String effect;
+    private int effectChance;
+    private double criticalChance;
+    private boolean skipThisTurn;
+    private boolean skipNextTurn;
+    private int attackCount;
+
+    public Attack(int id, String name, String description, String damageFormula, int damage, int hitChance, String effect, int effectChance, double criticalChance, boolean skipThisTurn, boolean skipNextTurn, int attackCount) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -18,18 +22,30 @@ public class Attack {
         this.damageFormula = damageFormula;
         this.hitChance = hitChance;
         this.effect = effect;
+        this.effectChance = effectChance;
         this.criticalChance = criticalChance;
         this.skipThisTurn = skipThisTurn;
         this.skipNextTurn = skipNextTurn;
+        this.attackCount = attackCount;
     }
 
-    // Método para reduzir a vida do alvo com base no dano calculado
-    public void applyDamage(Character target, int damage) {
-        // Reduz a vida do alvo com base no dano recebido
-        target.takeDamage(damage);
+    public void attack(Character attacker, Character target) {
+        // Verifica se há mais de um ataque a ser feito
+        if (attackCount > 1) {
+            // Realiza o número especificado de ataques
+            for (int i = 0; i < attackCount; i++) {
+                CombatManager.processTurn(attacker, target, this);
+            }
+        } else {
+            CombatManager.processTurn(attacker, target, this);
+        }
     }
 
-    // Métodos getters para obter informações do ataque
+    public void printDetails() {
+        System.out.println("Realizando " + this.name);
+        //System.out.println(this.description);
+    }
+
     public int getId() {
         return id;
     }
@@ -42,8 +58,12 @@ public class Attack {
         return description;
     }
 
-    public static String getDamageFormula() {
+    public String getDamageFormula() {
         return damageFormula;
+    }
+
+    public int getDamage() {
+        return damage;
     }
 
     public int getHitChance() {
@@ -66,14 +86,7 @@ public class Attack {
         return skipNextTurn;
     }
 
-    // Método para obter o dano base do ataque
-    public static int getBaseDamage() {
-        // Aqui você pode retornar o dano base do ataque
-        // Exemplo simples, você pode ajustar conforme sua implementação
-        return 10; // Valor base do dano, você pode ajustar conforme necessário
-    }
-
-    public int getActionId() {
-        return id;
+    public int getAttackCount() {
+        return attackCount;
     }
 }

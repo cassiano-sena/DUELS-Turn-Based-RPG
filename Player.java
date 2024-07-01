@@ -46,6 +46,7 @@ public class Player extends Character {
                 if (attemptEscape()) {
                     System.out.println("Você conseguiu fugir!");
                     waitFor(2);
+                    gameProcess.inBattle=false;
                     break;
                 } else {
                     System.out.println("Não foi possível fugir!");
@@ -73,7 +74,10 @@ public class Player extends Character {
                 for (int i = 0; i < itemActions.size(); i++) {
                     Attack attack = itemActions.get(i);
                     System.out.println((i + 1) + " - " + attack.getName() + ": " + attack.getDescription());
-                    System.out.println("    Dano: " + attack.getDamageFormula());
+                    System.out.println("    Dano: " + attack.getDamage());
+                    if (!(attack.getDamageFormula().isEmpty())){
+                        System.out.println(" + " + attack.getDamageFormula());
+                    }
                 }
                 System.out.print("Escolha o ataque: ");
                 int actionIndex = scanner.nextInt();
@@ -83,9 +87,9 @@ public class Player extends Character {
                     Attack selectedAttack = itemActions.get(actionIndex - 1);
                     System.out.println("Você usou " + selectedAttack.getName() + "!");
                     //int damage = calculateDamage(selectedAttack.getDamageFormula());
-                    int damage = calculateDamage(gameProcess.player, target);
+                    int damage = CombatManager.calculateDamage(gameProcess.player, target, selectedAttack);
                     System.out.println("Dano causado: " + damage);
-                    target.takeDamage(damage); // Aplicar dano ao inimigo
+                    target.takeDamage(damage);
                 } else {
                     System.out.println("Opção de ataque inválida.");
                 }
@@ -97,22 +101,25 @@ public class Player extends Character {
         }
     }
 
-    private void heal() {
+    protected void heal() {
         Random random = new Random();
         int healAmount = random.nextInt(10) + 1;
+        int healthCheck = gameProcess.player.getHealth() + healAmount;
+        if(healthCheck > gameProcess.player.getSelectedClass().getMaxHealth()){
+            System.out.println(gameProcess.player.getName()+" recebeu sobrevida de " + healAmount + " pontos!");
+        }
         this.health += healAmount;
         System.out.println("Você usou uma poção e restaurou " + healAmount + " de vida!");
     }
 
     public boolean attemptEscape() {
         Random random = new Random();
-        int chance = random.nextInt(100); // Gera um número entre 0 e 99
+        int chance = random.nextInt(100);
 
-        // Exemplo de uma chance de 30% de sucesso
         return chance < 30;
     }
 
-    @Override
+    //@Override
     public void equipItem(int itemId) {
         System.out.println("Equipando item ID " + itemId + "...");
         setEquippedItemById(itemId);
