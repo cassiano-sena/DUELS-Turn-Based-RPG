@@ -13,7 +13,7 @@ public class AttackList {
 
         AttackList.add(new Attack(4, "Ataque Selvagem", "Ataca ferozmente sem nenhum cuidado", "FOR", 20,50, "ricochete",20, 10,false, false, 1));
         AttackList.add(new Attack(5, "Machadada Forte", "Utiliza toda a inércia possível para causar dano", "FOR", 10, 100, "atordoamento",25, 10,false, false, 1));
-        AttackList.add(new Attack(6, "Mutilar", "Mutila o inimigo de forma sádica", "FOR", 10, 50, "sangramento",25, 10,false, false,1));
+        AttackList.add(new Attack(6, "Mutilar", "Mutila o inimigo de forma sádica", "FOR", 10, 50, "sangramento",100, 10,false, false,1));
 
 
 

@@ -6,6 +6,7 @@ class GameProcess {
     public Enemy enemy;
     public GameManager gameManager;
     public final Scanner scanner = new Scanner(System.in);
+    public boolean inBattle;
 
     public GameProcess() {
         this.gameManager = new GameManager();
@@ -18,8 +19,8 @@ class GameProcess {
             System.out.println("Esse jogo é um Turn-Based-RPG focado em duelos");
             System.out.println("\n");
             System.out.println("------------------------");
-            System.out.println("1. Criar Personagem");
-            System.out.println("2. Começar Batalha");
+            System.out.println("1. Começar Batalha");
+            System.out.println("2. Criar Personagem");
             System.out.println("3. Ver personagem");
             System.out.println("4. Ajuda");
             System.out.println("5. Sair");
@@ -30,14 +31,14 @@ class GameProcess {
 
             switch (choice) {
                 case 1:
-                    createCharacter();
-                    break;
-                case 2:
                     if (player != null) {
                         startBattle();
                     } else {
                         System.out.println("Por favor, crie um personagem primeiro.");
                     }
+                    break;
+                case 2:
+                    createCharacter();
                     break;
                 case 3:
                     if (player != null) {
@@ -55,6 +56,11 @@ class GameProcess {
                     System.out.println("Defesa é o numero que será reduzido de ataques recebidos");
                     System.out.println("Força é o modificador de ataques que usam força");
                     System.out.println("Destreza é o modificador que determina ordem de combate, também serve como modificador para alguns ataques");
+                    System.out.println("\n");
+                    System.out.println("KNOWN FLAWS:");
+                    System.out.println("- Efeito de Status não está corretamente implementado!");
+                    System.out.println("- Algumas features como crítico e fuga nãao estão funcionando corretamente!");
+                    System.out.println("- Criação de personagem não está funcionando corretamente após ganhar uma batalha!");
                     System.out.println("\n");
                     System.out.println("Pressione qualquer tecla...");
                     scanner.nextLine();
@@ -192,7 +198,7 @@ class GameProcess {
         System.out.println("---- Início da Batalha ----");
 
         enemy = createEnemy();
-        boolean inBattle = true;
+        inBattle = true;
 
         player.viewEnemy(enemy);
 
@@ -200,7 +206,7 @@ class GameProcess {
 
         while (inBattle) {
             System.out.println("-----------------------------");
-            System.out.println("\nRodada " + roundCount);
+            System.out.println("\nRodada " + roundCount + " - " + order[0].getName() + " > " + order[1].getName() + "\n");
 
             System.out.printf("%-20s %-20s\n", "Jogador: " + player.getName(), "Inimigo: " + enemy.getName());
             System.out.printf("%-20s %-20s\n", "Classe: " + player.getSelectedClass().getName(), "Classe: " + enemy.getSelectedClass().getName());
@@ -231,6 +237,7 @@ class GameProcess {
             System.out.println("Você foi derrotado!");
         } else {
             System.out.println("Você venceu a batalha!");
+            player.setHealth(player.getSelectedClass().maxHealth);
             gameManager.addBattleWon();
         }
 

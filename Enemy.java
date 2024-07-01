@@ -14,7 +14,7 @@ public class Enemy extends Character {
     }
 
     public void performAction(Player player) {
-        System.out.println("Turno de " + name + "!");
+        //System.out.println("Turno de " + name + "!");
         int choice = random.nextInt(3) + 1;
 
         switch (choice) {
@@ -48,8 +48,9 @@ public class Enemy extends Character {
             if (itemActions != null && !itemActions.isEmpty()) {
                 int actionIndex = random.nextInt(itemActions.size());
                 Attack selectedAttack = itemActions.get(actionIndex);
-                int damage = CombatManager.calculateDamage(gameProcess.enemy, player, selectedAttack);
                 System.out.println(name + " usou " + selectedAttack.getName() + "!");
+                waitFor(2);
+                int damage = CombatManager.calculateDamage(gameProcess.enemy, player, selectedAttack);
                 System.out.println("Dano causado: " + damage);
                 player.takeDamage(damage);
             } else {
@@ -63,12 +64,16 @@ public class Enemy extends Character {
     protected void heal() {
         Random random = new Random();
         int healAmount = random.nextInt(10) + 1;
+        int healthCheck = gameProcess.enemy.getHealth() + healAmount;
+        if(healthCheck > gameProcess.enemy.getSelectedClass().getMaxHealth()){
+            System.out.println(gameProcess.enemy.getName()+" recebeu sobrevida de " + healAmount + " pontos!");
+        }
         this.health += healAmount;
         System.out.println(name + " se curou e restaurou " + healAmount + " de vida!");
     }
 
     public void viewPlayer(Player player) {
-        System.out.println("---- Detalhes do Inimigo ----");
+        System.out.println("---- Detalhes do Jogador ----");
         System.out.println("Nome: " + player.getName());
         System.out.println("Raça: " + player.getOrigin());
         System.out.println("Classe: " + player.getSelectedClass().getName());

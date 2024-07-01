@@ -43,7 +43,7 @@ public class Attack {
 
     public void printDetails() {
         System.out.println("Realizando " + this.name);
-        System.out.println(this.description);
+        //System.out.println(this.description);
     }
 
     public int getId() {
