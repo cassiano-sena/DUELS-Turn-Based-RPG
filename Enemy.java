@@ -19,14 +19,17 @@ public class Enemy extends Character {
 
         switch (choice) {
             case 1:
+                System.out.println("O inimigo irá atacar!");
                 attack(player);
                 waitFor(3);
                 break;
             case 2:
+                System.out.println("O inimigo irá usar uma poção!");
                 heal();
                 waitFor(3);
                 break;
             case 3:
+                System.out.println("O inimigo irá analisar o jogador!");
                 viewPlayer(player);
                 waitFor(3);
                 break;
