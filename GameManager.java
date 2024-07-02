@@ -41,6 +41,7 @@ public class GameManager {
 
             // Capturando os novos valores após a atualização
             int newStrength = player.getSelectedClass().getStrength();
+            player.setHealth(player.getSelectedClass().getMaxHealth());
             int newMaxHealth = player.getSelectedClass().getMaxHealth();
             int newDexterity = player.getSelectedClass().getDexterity();
             int newDefense = player.getSelectedClass().getDefense();

@@ -8,13 +8,13 @@ public class Attack {
     private int damage;
     private int hitChance;
     private String effect;
-    private int effectChance;
+    private double effectChance;
     private double criticalChance;
     private boolean skipThisTurn;
     private boolean skipNextTurn;
     private int attackCount;
 
-    public Attack(int id, String name, String description, String damageFormula, int damage, int hitChance, String effect, int effectChance, double criticalChance, boolean skipThisTurn, boolean skipNextTurn, int attackCount) {
+    public Attack(int id, String name, String description, String damageFormula, int damage, int hitChance, String effect, double effectChance, double criticalChance, boolean skipThisTurn, boolean skipNextTurn, int attackCount) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -30,9 +30,7 @@ public class Attack {
     }
 
     public void attack(Character attacker, Character target) {
-        // Verifica se há mais de um ataque a ser feito
         if (attackCount > 1) {
-            // Realiza o número especificado de ataques
             for (int i = 0; i < attackCount; i++) {
                 CombatManager.processTurn(attacker, target, this);
             }
@@ -43,12 +41,13 @@ public class Attack {
 
     public void printDetails() {
         System.out.println("Realizando " + this.name);
-        //System.out.println(this.description);
     }
 
     public int getId() {
         return id;
     }
+
+    public double getEffectChance() { return effectChance; }
 
     public String getName() {
         return name;

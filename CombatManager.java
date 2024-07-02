@@ -9,6 +9,13 @@ public class CombatManager {
         if (hit) {
             damage = attack.getDamage();
             damage = applyDamageModifiers(attacker, target, damage, attack);
+
+            // Verificar acerto crítico
+            if (isCriticalHit(attack)) {
+                System.out.println("Acerto Crítico!");
+                damage *= 2; // Dano crítico é dobrado (ou ajuste conforme desejado)
+            }
+
             if (attack.getAttackCount() > 1) {
                 damage = applyMultiAttack(attacker, target, attack, damage);
             }
@@ -52,13 +59,38 @@ public class CombatManager {
     }
 
     private static void applyStatusEffects(Character attacker, Character target, Attack attack) {
+        String effect = attack.getEffect();
+        double effectChance = attack.getEffectChance();
+        Random random = new Random();
+        int chance = random.nextInt(101);
 
+        if (chance <= effectChance) {
+            System.out.println(target.getName() + " foi afetado por " + effect + "!");
+
+            switch (effect.toLowerCase()) {
+                case "sono":
+                    target.setSleeping(true, 3); // Durma por 3 turnos, por exemplo
+                    break;
+                case "fogo":
+                    target.setBurning(true, 3); // Queime por 3 turnos
+                    break;
+                case "atordoamento":
+                    target.setStunned(true, 1); // Atordoado por 1 turno
+                    break;
+                case "veneno":
+                    target.setPoisoned(true, 5); // Envenenado por 5 turnos
+                    break;
+                default:
+                    System.out.println("Efeito desconhecido: " + effect);
+                    break;
+            }
+        }
     }
 
-    private static boolean isCriticalHit() {
+    private static boolean isCriticalHit(Attack attack) {
         Random random = new Random();
         int criticalChance = random.nextInt(101);
-        return criticalChance <= 10;
+        return criticalChance <= attack.getCriticalChance() * 100; // Convertendo a chance crítica para porcentagem
     }
 
     public static void processTurn(Character attacker, Character target, Attack attack) {
@@ -76,12 +108,11 @@ public class CombatManager {
 
         int damage = calculateDamage(attacker, target, attack);
 
-        if (isCriticalHit()) {
-            System.out.println("Acerto Crítico!");
-        }
-
         target.takeDamage(damage);
 
         System.out.println(attacker.getName() + " atacou " + target.getName() + " causando " + damage + " de dano.");
+
+        // Atualiza os efeitos de status do alvo após o ataque
+        target.updateStatusEffects();
     }
 }
