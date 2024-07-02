@@ -238,7 +238,7 @@ class GameProcess {
         } else {
             System.out.println("Você venceu a batalha!");
             player.setHealth(player.getSelectedClass().maxHealth);
-            gameManager.addBattleWon();
+            gameManager.addBattleWon(player);
         }
 
         System.out.println("---- Fim da Batalha ----");
