@@ -53,7 +53,6 @@ Bem-vindo ao DUELS, um emocionante RPG baseado em turnos onde você pode criar s
 
 6. **Objetivo:**
    - Vença as batalhas e torne-se o maior guerreiro de todos os tempos!
->>>>>>> main
 
 ## Requisitos
 
