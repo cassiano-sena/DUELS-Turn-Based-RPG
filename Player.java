@@ -74,15 +74,15 @@ public class Player extends Character {
                 for (int i = 0; i < itemActions.size(); i++) {
                     Attack attack = itemActions.get(i);
                     System.out.println((i + 1) + " - " + attack.getName() + ": " + attack.getDescription());
-                    System.out.println("    Dano: " + attack.getDamage());
                     if (!(attack.getDamageFormula().isEmpty())){
-                        System.out.println(" + " + attack.getDamageFormula());
+                        System.out.println("Dano: " + attack.getDamage() + " + " + attack.getDamageFormula());
+                    }else {
+                        System.out.println("Dano: " + attack.getDamage());
                     }
                 }
                 System.out.print("Escolha o ataque: ");
                 int actionIndex = scanner.nextInt();
-                scanner.nextLine(); // Consumir a nova linha após o nextInt()
-
+                scanner.nextLine();
                 if (actionIndex >= 1 && actionIndex <= itemActions.size()) {
                     Attack selectedAttack = itemActions.get(actionIndex - 1);
                     System.out.println("Você usou " + selectedAttack.getName() + "!");
