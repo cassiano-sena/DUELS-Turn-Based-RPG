@@ -47,6 +47,9 @@ public class CombatManager {
         } else if (damageFormula.equals("DES")) {
             int attackerDexterity = attacker.getSelectedClass().getDexterity();
             damage += attackerDexterity;
+        } else if (damageFormula.equals("INT")) {
+            int attackerIntelligence = attacker.getSelectedClass().getIntelligence();
+            damage += attackerIntelligence;
         }
 
         return damage;
