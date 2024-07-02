@@ -123,7 +123,7 @@ class GameProcess {
     }
 
     private String askForOrigin() {
-        System.out.print("Digite a raça do personagem (e.g., Humano, Elfo): ");
+        System.out.print("Digite a raça do personagem (ex: Humano, Elfo): ");
         return scanner.nextLine();
     }
 
