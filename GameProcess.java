@@ -59,9 +59,10 @@ class GameProcess {
                     System.out.println("Destreza é o modificador que determina ordem de combate, também serve como modificador para alguns ataques");
                     System.out.println("\n");
                     System.out.println("KNOWN FLAWS:");
-                    System.out.println("- Efeito de Status não está corretamente implementado!");
-                    System.out.println("- Algumas features como crítico e fuga nãao estão funcionando corretamente!");
+                    System.out.println("- Efeito de Status não está 100% funcional, mas boa parte funciona!");
+                    System.out.println("- Algumas features como fuga nãao estão funcionando corretamente!");
                     System.out.println("- Criação de personagem não está funcionando corretamente após ganhar uma batalha!");
+                    System.out.println("- Ataques que esperam o próximo turno ou perdem o próximo turno não estão implementados!");
                     System.out.println("\n");
                     System.out.println("Pressione qualquer tecla...");
                     scanner.nextLine();
