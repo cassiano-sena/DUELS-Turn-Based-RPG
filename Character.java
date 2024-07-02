@@ -13,6 +13,8 @@ abstract class Character {
     private boolean actionTaken;
     private boolean waitNextTurn;
     private boolean exhaustedNextTurn;
+    protected int experiencePoints;
+    protected int level;
 
     public Character(String name, String origin, Classes selectedClass, Item equippedItem, String status) {
         this.name = name;
@@ -25,6 +27,8 @@ abstract class Character {
         this.actionTaken = false;
         this.waitNextTurn = false;
         this.exhaustedNextTurn = false;
+        this.experiencePoints = 0;
+        this.level = 1;
     }
 
     public void addStatusEffect(StatusEffect statusEffect, int duration) {
@@ -33,6 +37,45 @@ abstract class Character {
         statusEffect.applyEffect(this);
     }
 
+    public void addExperience(int exp) {
+        this.experiencePoints += exp;
+        checkLevelUp(); // Após adicionar experiência, verifica se houve subida de nível
+    }
+
+    public void checkLevelUp() {
+        if (experiencePoints >= 100 * level) {
+            level++;
+            System.out.println(name + " subiu para o nível " + level + "!");
+
+            // Atualiza os atributos da classe selecionada do jogador
+            updatePlayerAttributes();
+        }
+    }
+
+    private void updatePlayerAttributes() {
+        int oldStrength = selectedClass.getStrength();
+        int oldMaxHealth = selectedClass.getMaxHealth();
+        int oldDexterity = selectedClass.getDexterity();
+        int oldDefense = selectedClass.getDefense();
+        int oldIntelligence = selectedClass.getIntelligence();
+
+        // Aumenta os atributos da classe selecionada do jogador
+        selectedClass.setStrength(oldStrength + 5);
+        selectedClass.setMaxHealth(oldMaxHealth + 5);
+        selectedClass.setDexterity(oldDexterity + 5);
+        selectedClass.setDefense(oldDefense + 5);
+        selectedClass.setIntelligence(oldIntelligence + 5);
+
+        // Atualiza a saúde do jogador com a nova saúde máxima
+        setHealth(selectedClass.getMaxHealth());
+
+        // Exibe as mudanças nos atributos
+        System.out.println("Força: " + oldStrength + " -> " + selectedClass.getStrength());
+        System.out.println("Destreza: " + oldDexterity + " -> " + selectedClass.getDexterity());
+        System.out.println("Vida Máxima: " + oldMaxHealth + " -> " + selectedClass.getMaxHealth());
+        System.out.println("Defesa: " + oldDefense + " -> " + selectedClass.getDefense());
+        System.out.println("Inteligência: " + oldIntelligence + " -> " + selectedClass.getIntelligence());
+    }
     public void updateStatusEffects() {
         boolean anyStatusActive = false; // Variável para verificar se algum status está ativo
 
