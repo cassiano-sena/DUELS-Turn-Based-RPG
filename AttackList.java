@@ -42,21 +42,21 @@ public class AttackList {
 
 
 
-        AttackList.add(new Attack(20, "Magia do Sono", "Recita um encantamento adormecente", "", 0, 50, "sono",50, 10,false, false, 1));
-        AttackList.add(new Attack(21, "Cometa Explosivo", "Arremessa um cometa mágico que pode explodir ao contato", "", 10, 60, "",0, 10,false, false, 1));
-        AttackList.add(new Attack(22, "Esfera Arcana", "Conjura uma esfera arcana rápida", "", 10, 100, "atordoamento",20, 10,false, false, 1));
+        AttackList.add(new Attack(20, "Magia do Sono", "Recita um encantamento adormecente", "INT", 0, 50, "sono",50, 10,false, false, 1));
+        AttackList.add(new Attack(21, "Cometa Explosivo", "Arremessa um cometa mágico que pode explodir ao contato", "INT", 10, 60, "",0, 50,false, false, 1));
+        AttackList.add(new Attack(22, "Esfera Arcana", "Conjura uma esfera arcana rápida", "INT", 10, 100, "atordoamento",20, 10,false, false, 1));
 
 
 
-        AttackList.add(new Attack(23, "Evocar Raio", "Conjura um raio", "",20 ,100, "",0, 50,false, false, 1));
-        AttackList.add(new Attack(24, "Trovão", "Evoca uma tempestade.", "", 10, 100,"atordoamento",50, 0, false, false, 1));
-        AttackList.add(new Attack(25, "Cadeia Elétrica", "Emite uma cadeia elétrica entre o inimigo e o cajado", "", 10, 100, "atordoamento",30, 10,false, false,1));
+        AttackList.add(new Attack(23, "Evocar Raio", "Conjura um raio", "INT",20 ,100, "",0, 50,false, false, 1));
+        AttackList.add(new Attack(24, "Trovão", "Evoca uma tempestade.", "INT", 10, 100,"atordoamento",50, 0, false, false, 1));
+        AttackList.add(new Attack(25, "Cadeia Elétrica", "Emite uma cadeia elétrica entre o inimigo e o cajado", "INT", 10, 100, "atordoamento",30, 10,false, false,1));
 
 
 
-        AttackList.add(new Attack(26, "Bola de Fogo", "Sacrifica o próximo turno e arremessa uma bola de fogo", "",40, 40, "",0, 10,false, true, 1));
-        AttackList.add(new Attack(27, "Armadura de Fogo", "Os próximos 5 ataques sofridos causam 5 de dano ao inimigo", "", 0, 100, "espinhos",100, 10,false, false, 1));
-        AttackList.add(new Attack(28, "Lança-Chamas", "Evoca um cone de chamas", "", 10, 50, "fogo",50, 10,false, false, 1));
+        AttackList.add(new Attack(26, "Bola de Fogo", "Sacrifica o próximo turno e arremessa uma bola de fogo", "INT",40, 50, "",0, 30,false, true, 1));
+        AttackList.add(new Attack(27, "Armadura de Fogo", "Os próximos 5 ataques sofridos causam 5 de dano ao inimigo", "INT", 0, 100, "espinhos",100, 10,false, false, 1));
+        AttackList.add(new Attack(28, "Lança-Chamas", "Evoca um cone de chamas", "INT", 10, 50, "fogo",50, 10,false, false, 1));
 
 
 

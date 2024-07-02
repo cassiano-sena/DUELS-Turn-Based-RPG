@@ -4,13 +4,15 @@ public abstract class Classes {
     protected int defense;
     protected int strength;
     protected int dexterity;
+    protected int intelligence;
 
-    public Classes(String name, int maxHealth, int defense, int strength, int dexterity) {
+    public Classes(String name, int maxHealth, int defense, int strength, int dexterity, int intelligence) {
         this.name = name;
         this.maxHealth = maxHealth;
         this.defense = defense;
         this.strength = strength;
         this.dexterity = dexterity;
+        this.intelligence = intelligence;
     }
 
     public String getName() {
@@ -51,6 +53,14 @@ public abstract class Classes {
 
     public void setDexterity(int dexterity) {
         this.dexterity = dexterity;
+    }
+
+    public int getIntelligence() {
+        return intelligence;
+    }
+
+    public void setIntelligence(int intelligence) {
+        this.intelligence = intelligence;
     }
 }
 

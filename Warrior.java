@@ -1,6 +1,6 @@
 public class Warrior extends Classes {
     public Warrior(String name) {
-        super("Guerreiro", 150, 20, 15, 10);
+        super("Guerreiro", 120, 20, 15, 10, 5);
     }
 
     public void useSkill() {
