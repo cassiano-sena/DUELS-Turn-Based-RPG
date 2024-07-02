@@ -1,5 +1,6 @@
 import java.util.Random;
 import java.util.Scanner;
+import java.util.List;
 
 class GameProcess {
     public Player player;
@@ -212,6 +213,25 @@ class GameProcess {
             System.out.printf("%-20s %-20s\n", "Classe: " + player.getSelectedClass().getName(), "Classe: " + enemy.getSelectedClass().getName());
             System.out.printf("%-20s %-20s\n", "Vida: " + player.getHealth() + "/" + player.getSelectedClass().getMaxHealth(), "Vida: " + enemy.getHealth() + "/" + enemy.getSelectedClass().getMaxHealth());
             System.out.printf("%-20s %-20s\n", "Defesa: " + player.getSelectedClass().getDefense(), "Defesa: " + enemy.getSelectedClass().getDefense());
+
+            List<String> playerStatusEffects = player.getStatusEffects();
+            List<String> enemyStatusEffects = enemy.getStatusEffects();
+
+            String playerStatusString = "Status: ";
+            String enemyStatusString = "Status: ";
+
+            for (String status : playerStatusEffects) {
+                playerStatusString += status + ", ";
+            }
+            playerStatusString = playerStatusString.substring(0, playerStatusString.length() - 2); // Remove a última vírgula e espaço
+
+            for (String status : enemyStatusEffects) {
+                enemyStatusString += status + ", ";
+            }
+            enemyStatusString = enemyStatusString.substring(0, enemyStatusString.length() - 2); // Remove a última vírgula e espaço
+
+            System.out.printf("%-20s %-20s\n\n", playerStatusString, enemyStatusString);
+
             System.out.println("\n");
 
             for (Character character : order) {

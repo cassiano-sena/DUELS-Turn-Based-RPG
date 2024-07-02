@@ -34,6 +34,29 @@ abstract class StatusEffect {
         this.duration = duration;
     }
 }
+class BleedEffect extends StatusEffect {
+    private int damagePerRound;
+
+    public BleedEffect(int duration, int damagePerRound) {
+        super("sangrando", duration);
+        this.damagePerRound = damagePerRound;
+    }
+
+    @Override
+    public void applyEffect(Character character) {
+        System.out.println(character.getName() + " está sangrando!");
+        character.takeDamage(damagePerRound); // Aplica dano de sangramento imediatamente
+    }
+
+    public int getDamagePerRound() {
+        return damagePerRound;
+    }
+
+    public void setDamagePerRound(int damagePerRound) {
+        this.damagePerRound = damagePerRound;
+    }
+}
+
 class SleepStatus extends StatusEffect {
     public SleepStatus(int duration) {
         super("sono", duration);
@@ -94,68 +117,6 @@ class BurnStatus extends StatusEffect {
         this.damagePerTurn = damagePerTurn;
     }
 }
-class PoisonousWeaponEffect extends StatusEffect {
-    private int poisonChance;
-    private int poisonDamage;
-
-    public PoisonousWeaponEffect(int duration, int poisonChance, int poisonDamage) {
-        super("imbuiu sua arma com veneno", duration);
-        this.poisonChance = poisonChance;
-        this.poisonDamage = poisonDamage;
-    }
-
-    @Override
-    public void applyEffect(Character character) {
-        System.out.println(character.getName() + " imbuiu sua arma com veneno!");
-    }
-
-    public int getPoisonChance() {
-        return poisonChance;
-    }
-
-    public void setPoisonChance(int poisonChance) {
-        this.poisonChance = poisonChance;
-    }
-
-    public int getPoisonDamage() {
-        return poisonDamage;
-    }
-
-    public void setPoisonDamage(int poisonDamage) {
-        this.poisonDamage = poisonDamage;
-    }
-}
-class FieryWeaponEffect extends StatusEffect {
-    private int fireChance;
-    private int fireDamage;
-
-    public FieryWeaponEffect(int duration, int fireChance, int fireDamage) {
-        super("imbuiu sua arma com fogo", duration);
-        this.fireChance = fireChance;
-        this.fireDamage = fireDamage;
-    }
-
-    @Override
-    public void applyEffect(Character character) {
-        System.out.println(character.getName() + " imbuiu sua arma com fogo!");
-    }
-
-    public int getFireChance() {
-        return fireChance;
-    }
-
-    public void setFireChance(int fireChance) {
-        this.fireChance = fireChance;
-    }
-
-    public int getFireDamage() {
-        return fireDamage;
-    }
-
-    public void setFireDamage(int fireDamage) {
-        this.fireDamage = fireDamage;
-    }
-}
 class RecoilEffect extends StatusEffect {
     private int damageRecoiled = 5;
 
@@ -166,7 +127,7 @@ class RecoilEffect extends StatusEffect {
 
     @Override
     public void applyEffect(Character character) {
-        System.out.println(character.getName() + " imbuir sua arma com espinhos!");
+        System.out.println(character.getName() + " tomou dano de volta!");
     }
 
     public int getDamageReturned() {
@@ -177,4 +138,23 @@ class RecoilEffect extends StatusEffect {
         this.damageRecoiled = RecoilEffect.this.damageRecoiled;
     }
 }
+class ThornsEffect extends StatusEffect {
+    private int damagePerTurn = 5;
 
+    public ThornsEffect(int duration) {
+        super("queimando", duration);
+    }
+
+    @Override
+    public void applyEffect(Character character) {
+        System.out.println(character.getName() + " está pegando fogo!");
+    }
+
+    public int getDamagePerTurn() {
+        return damagePerTurn;
+    }
+
+    public void setDamagePerTurn(int damagePerTurn) {
+        this.damagePerTurn = damagePerTurn;
+    }
+}

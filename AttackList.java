@@ -31,7 +31,7 @@ public class AttackList {
 
 
         AttackList.add(new Attack(14, "Flecha Precisa", "Dispara com precisão uma flecha em direção ao inimigo", "DES", 10, 100, "",0, 50,false, false, 1));
-        AttackList.add(new Attack(15, "Flecha Envenenada", "Arremessa uma flecha envenenada", "10 + DES", 10, 100, "envenenamento",25, 10,false, false, 1));
+        AttackList.add(new Attack(15, "Flecha Envenenada", "Arremessa uma flecha envenenada", "10 + DES", 10, 100, "veneno",25, 10,false, false, 1));
         AttackList.add(new Attack(16, "Flecha Pesada", "Arremessa uma flecha pesada em direção ao inimigo", "10 + DES", 10, 100, "atordoar",20, 10,false, false, 1));
 
 
@@ -63,13 +63,13 @@ public class AttackList {
         AttackList.add(new Attack(29, "Corte", "Faz um corte rápido", "DES", 5, 100, "",0, 20,false, false, 1));
         AttackList.add(new Attack(30, "Ataque Furtivo", "Sai da camuflagem para causar um golpe preciso de surpresa", "DES", 5, 100, "",0, 100,false, false, 1));
         AttackList.add(new Attack(31, "Furtividade", "Fica camuflado", "", 0, 100, "camuflado",100, 0,false, false, 1));
-        AttackList.add(new Attack(32, "Imbuir com veneno", "Aplica veneno à lâmina, os próximos 3 ataques tem 30% de envenenar", "", 0, 100, "imbuir com veneno",50, 0,false, false, 1));
+        AttackList.add(new Attack(32, "Imbuir com veneno", "Aplica veneno à lâmina", "", 10, 100, "veneno",50, 0,false, false, 1));
 
 
 
         AttackList.add(new Attack(33, "Enxurrada de Cortes", "Série de 5 ataques rápidos", "DES", 10, 50, "",0, 10,false, false, 5));
         AttackList.add(new Attack(34, "Lacerar", "Cruza as lâminas e causa uma ferida aberta", "DES", 10, 50, "sangramento",50, 10,false, false, 1));
-        AttackList.add(new Attack(35, "Imbuir com chamas", "Aplica óleo inflamável à lâmina, os próximos 3 ataques tem 30% de botar fogo", "", 0, 100, "fogo",30, 10,false, false, 1));
+        AttackList.add(new Attack(35, "Imbuir com chamas", "Aplica óleo inflamável à lâmina", "", 10, 100, "fogo",30, 10,false, false, 1));
 
 
 

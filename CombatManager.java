@@ -1,3 +1,4 @@
+import java.util.Objects;
 import java.util.Random;
 
 public class CombatManager {
@@ -10,10 +11,9 @@ public class CombatManager {
             damage = attack.getDamage();
             damage = applyDamageModifiers(attacker, target, damage, attack);
 
-            // Verificar acerto crítico
             if (isCriticalHit(attack)) {
                 System.out.println("Acerto Crítico!");
-                damage *= 2; // Dano crítico é dobrado (ou ajuste conforme desejado)
+                damage *= 2;
             }
 
             if (attack.getAttackCount() > 1) {
@@ -65,20 +65,35 @@ public class CombatManager {
         int chance = random.nextInt(101);
 
         if (chance <= effectChance) {
-            System.out.println(target.getName() + " foi afetado por " + effect + "!");
-
+            if (Objects.equals(effect, "espinhos") || Objects.equals(effect, "ricochete")){
+                System.out.println(attacker.getName() + " foi afetado por " + effect + "!");
+            }else {
+                System.out.println(target.getName() + " foi afetado por " + effect + "!");
+            }
             switch (effect.toLowerCase()) {
                 case "sono":
-                    target.setSleeping(true, 3); // Durma por 3 turnos, por exemplo
+                    target.setSleeping(true, 3);
                     break;
                 case "fogo":
-                    target.setBurning(true, 3); // Queime por 3 turnos
+                    target.setBurning(true, 3);
                     break;
                 case "atordoamento":
-                    target.setStunned(true, 1); // Atordoado por 1 turno
+                    target.setStunned(true, 1);
                     break;
                 case "veneno":
-                    target.setPoisoned(true, 5); // Envenenado por 5 turnos
+                    target.setPoisoned(true, 5);
+                    break;
+                case "espinhos":
+                    attacker.setThorns(true, 5, 5);
+                    break;
+                case "curar":
+                    target.heal();
+                    break;
+                case "ricochete":
+                    attacker.setRecoil(true, 1,5);
+                    break;
+                case "sangramento":
+                    target.setBleeding(true, 1,5);
                     break;
                 default:
                     System.out.println("Efeito desconhecido: " + effect);
@@ -108,11 +123,9 @@ public class CombatManager {
 
         int damage = calculateDamage(attacker, target, attack);
 
+        target.updateStatusEffects();
         target.takeDamage(damage);
-
         System.out.println(attacker.getName() + " atacou " + target.getName() + " causando " + damage + " de dano.");
 
-        // Atualiza os efeitos de status do alvo após o ataque
-        target.updateStatusEffects();
     }
 }

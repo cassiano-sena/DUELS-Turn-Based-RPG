@@ -34,14 +34,33 @@ abstract class Character {
     }
 
     public void updateStatusEffects() {
+        boolean anyStatusActive = false; // Variável para verificar se algum status está ativo
+
         for (StatusEffect effect : new ArrayList<>(statusEffects)) {
             effect.decreaseDuration();
             if (!effect.isActive()) {
                 statusEffects.remove(effect);
                 System.out.println(name + " não está mais " + effect.getName() + ".");
                 clearStatus(effect.getName());
+            } else {
+                anyStatusActive = true; // Se ainda há algum status ativo
+                System.out.println(name + " está sendo afetado por " + effect.getName() + ".");
             }
         }
+
+        // Se nenhum status estiver ativo, imprimir que não há status ativos
+        if (!anyStatusActive) {
+            System.out.println(name + " não está sob efeitos de status.");
+        }
+    }
+
+
+    public List<String> getStatusEffects() {
+        List<String> activeEffects = new ArrayList<>();
+        for (StatusEffect effect : statusEffects) {
+            activeEffects.add(effect.getName());
+        }
+        return activeEffects;
     }
 
     public boolean isActionTaken() {
@@ -52,11 +71,11 @@ abstract class Character {
         this.actionTaken = actionTaken;
     }
 
-    public boolean isWaitingNextTurn(){
+    public boolean isWaitingNextTurn() {
         return waitNextTurn;
     }
 
-    public boolean isExhaustedNextTurn(){
+    public boolean isExhaustedNextTurn() {
         return exhaustedNextTurn;
     }
 
@@ -64,7 +83,7 @@ abstract class Character {
         this.exhaustedNextTurn = exhaustedNextTurn;
     }
 
-    public void setWaitNextTurn(boolean waitNextTurn){
+    public void setWaitNextTurn(boolean waitNextTurn) {
         this.waitNextTurn = waitNextTurn;
     }
 
@@ -88,6 +107,14 @@ abstract class Character {
         }
     }
 
+    public void setBleeding(boolean bleeding, int duration, int bleedDamage) {
+        if (bleeding) {
+            addStatusEffect(new BleedEffect(duration, bleedDamage), duration);
+        } else {
+            clearStatus("sangrando");
+        }
+    }
+
     public void setStunned(boolean stunned, int duration) {
         if (stunned) {
             addStatusEffect(new StunStatus(duration), duration);
@@ -103,9 +130,39 @@ abstract class Character {
             clearStatus("envenenado");
         }
     }
+    public void setThorns(boolean hasThorns, int duration, int thornDamage) {
+        if (hasThorns) {
+            addStatusEffect(new ThornsEffect(duration), duration);
+        } else {
+            clearStatus("espinhos");
+        }
+    }
+
+    public void setRecoil(boolean hasRecoil, int duration, int recoilDamage) {
+        if (hasRecoil) {
+            addStatusEffect(new RecoilEffect(duration), duration);
+        } else {
+            clearStatus("recoil");
+        }
+    }
+//    public void setFieryWeapon(boolean hasFieryWeapon, int duration, int fireChance, int fireDamage) {
+//        if (hasFieryWeapon) {
+//            addStatusEffect(new FieryWeaponEffect(duration, fireChance, fireDamage), duration);
+//        } else {
+//            clearStatus("imbuiu sua arma com fogo");
+//        }
+//    }
+//
+//    public void setPoisonousWeapon(boolean hasPoisonousWeapon, int duration, int poisonChance, int poisonDamage) {
+//        if (hasPoisonousWeapon) {
+//            addStatusEffect(new PoisonousWeaponEffect(duration, poisonChance, poisonDamage), duration);
+//        } else {
+//            clearStatus("imbuiu sua arma com veneno");
+//        }
+//    }
 
     private void clearStatus(String statusName) {
-        this.status="";
+        this.status = "";
     }
 
     public String getName() {
@@ -192,6 +249,12 @@ abstract class Character {
         if (actionIndex >= 0 && actionIndex < itemActions.size()) {
             Attack selectedAction = itemActions.get(actionIndex);
             System.out.println("Ataque selecionado: " + selectedAction.getDescription());
+
+//            if (equippedItem.hasFieryWeaponEffect()) {
+//                setFieryWeapon(true, 3, 50, 5);
+//            } else if (equippedItem.hasPoisonousWeaponEffect()) {
+//                setPoisonousWeapon(true, 3, 50, 5);
+//            }
 
             // Executa o ataque usando a classe Attack
             selectedAction.attack(attacker, target);
