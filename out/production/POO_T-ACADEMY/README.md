@@ -6,21 +6,21 @@ Bem-vindo ao DUELS, um emocionante RPG baseado em turnos onde você pode criar s
 
 1. **Crie seu Personagem:**
     - Escolha um nome e raça para o seu personagem.
-    - Selecione uma das quatro classes disponíveis, cada uma com atributos únicos como vida, defesa, força e destreza.
+    - Selecione uma das quatro classes disponíveis, cada uma com atributos como vida, defesa, força e destreza.
 
 2. **Escolha sua Classe:**
-    - **Guerreiro:** Resistente e poderoso.
+    - **Guerreiro:** Resistente e forte.
     - **Mago:** Conjurador de magias poderosas.
-    - **Patrulheiro:** Habilidoso em manter distância dos inimigos.
-    - **Ladino:** Rápido e letal, especializado em ataques furtivos.
+    - **Patrulheiro:** Mantêm distância dos inimigos.
+    - **Ladino:** Rápido e letal.
 
 3. **Equipamentos e Armas:**
     - Escolha entre uma variedade de armas, cada uma com habilidades especiais e danos específicos.
     - As armas podem alterar significativamente a forma como você enfrenta seus oponentes.
 
 4. **Combate em Turnos:**
-    - Enfrente inimigos em batalhas baseadas em turnos.
-    - Utilize a destreza do seu personagem para determinar a ordem dos ataques.
+    - Enfrente inimigos em duelos baseadas em turnos.
+    - A destreza do seu personagem determina a ordem dos ataques.
     - Estrategicamente, escolha entre diferentes habilidades e ataques para derrotar seus oponentes.
 
 5. **Progresso e Desenvolvimento:**
